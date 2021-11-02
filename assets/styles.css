@@ -1,5 +1,10 @@
 body {
-    min-height: 100vh;
+    padding-top: calc(1rem + 1.3rem + 1rem);
+    /* This padding is kept because the navbar is fixed and it would overlap the content. 
+    The padding is equal to the height of the navbar which is calculated by:
+    1rem top padding of item + 1rem bottom padding of item + 1.3 rem font-size */
+    height: 100vh;
+    overflow-y: auto;
     background-image: linear-gradient(135deg, #e100ff 0%, #7f00ff 100%);
 }
 
@@ -8,6 +13,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: all .2s ease-in-out;
 }
 
 h1,
@@ -17,4 +23,57 @@ h4,
 h5,
 h6 {
     color: #fff;
+}
+
+nav {
+    background: #fff9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding-left: 40%;
+}
+
+nav .items {
+    display: flex;
+}
+
+nav .toggle {
+    display: none;
+}
+
+nav .item,
+nav .toggle {
+    color: #000;
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+nav .item:hover,
+nav .item.active {
+    background-color: #fff5;
+}
+
+@media screen and (max-width: 750px) {
+    nav .toggle {
+        width: calc(1rem + 1.3rem + 1rem);
+        display: block;
+        cursor: pointer;
+        margin-left: auto;
+    }
+    nav .items {
+        overflow: hidden;
+        height: 0;
+        flex-direction: column;
+    }
+    nav .items.active {
+        height: auto;
+    }
+    nav {
+        padding-left: 0;
+    }
 }
