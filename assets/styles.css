@@ -48,6 +48,34 @@ h6 {
     text-align: center;
 }
 
+.rotate-clockwise {
+    animation: rotate-clockwise 1s linear infinite;
+    transform-origin: center;
+}
+
+.rotate-anticlockwise {
+    animation: rotate-anticlockwise 1s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes rotate-clockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-anticlockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
 
 /* Navbar specific CSS */
 
