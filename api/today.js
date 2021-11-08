@@ -1,11 +1,8 @@
 const request = require("./utils").request;
 
 exports.handler = async function (event, context) {
-	let query = event.headers['client-ip'] == "::1" ? 'auto:ip' : event.headers['client-ip']
-	// If localhost, use auto:ip
-	
+	let query = new URLSearchParams(event.body).get("ip");
 	let resp = await request(`http://api.weatherapi.com/v1/forecast.json?q=${query}&key=13241e17ba4045aa99440133212110`, {})
-	console.log(JSON.stringify({event, context, query, resp}, null, 2))
 	return {
 		statusCode: 200,
 		body: JSON.stringify(resp)
