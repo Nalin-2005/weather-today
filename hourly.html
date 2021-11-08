@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/pages/hourly.css">
     <title>Detailed Hourly Forecast | Weather Today</title>
 </head>
 
@@ -21,7 +22,116 @@
     </nav>
 
 
+    <main>
+        <div class="meridiem" id="meridiem" onclick="meridiemSwitch(this);">AM</div>
+        <div id="button-grid">
+            <div class="hour" data-index="0"></div>
+            <div class="hour" data-index="1"></div>
+            <div class="hour" data-index="2"></div>
+            <div class="hour" data-index="3"></div>
+            <div class="hour" data-index="4"></div>
+            <div class="hour" data-index="5"></div>
+            <div class="hour" data-index="6"></div>
+            <div class="hour" data-index="7"></div>
+            <div class="hour" data-index="8"></div>
+            <div class="hour" data-index="9"></div>
+            <div class="hour" data-index="10"></div>
+            <div class="hour" data-index="11"></div>
+            <div class="clock">
+                <div class="hours-container">
+                    <div class="hours"></div>
+                </div>
+                <div class="minutes-container">
+                    <div class="minutes"></div>
+                </div>
+            </div>
+        </div>
+        <div id="forecast-container">
+            <div id="forecast-closer" onclick="hideDetails();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"/></svg>
+            </div>
+            <div id="forecast"></div>
+        </div>
+    </main>
+
+
     <script src="assets/script.js"></script>
+    <script>
+        var hoursData;
+        fetchApi(ENDPOINTS.TODAY).then(data => {
+            hoursData = data.forecast.forecastday[0].hour;
+            let hourContainers = document.getElementsByClassName("hour")
+            for (let i in range(12)) {
+                let hourContainer = hourContainers[i]
+                let hourPosition = hourPositions[i]
+                hourContainer.innerHTML = i == 0 ? 12 : i
+                hourContainer.style.gridColumn = hourPosition[0]
+                hourContainer.style.gridRow = hourPosition[1]
+                hourContainer.onclick = showDetails
+            }
+
+            // show details of first hour for testing ui without clicking on it
+            // showDetails({
+            //    target: document.querySelector(".hour")
+            // })
+        })
+
+        function meridiemSwitch(target) {
+            target.innerText == "AM" ? target.innerText = "PM" : target.innerText = "AM"
+        }
+
+
+        function showDetails(ev) {
+            const target = ev.target
+            const meridiem = document.getElementById("meridiem").innerText
+            const hour = hoursData[Number(target.dataset.index) + (meridiem == "PM" ? 12 : 0)]
+            const forecast = document.getElementById("forecast");
+            forecast.parentElement.style.display = "grid"
+            forecast.innerHTML = `
+                <h2>Weather forecast at ${hour.time}</h2>
+                <p>
+                    Weather Condition: ${hour.condition.text}<br/>
+                    <img src="${hour.condition.icon}" alt="" />
+                </p>
+                <p>Avg. Temperature: ${hour.temp_c}°C (${hour.temp_f}°F)</p>
+                <p>Avg. Wind Speed: ${hour.wind_kph} km/h</p>
+                <p>Precipitation: ${hour.precip_mm} mm</p>
+            `
+        }
+
+        function hideDetails() {
+            document.getElementById("forecast-container").style.display = "none"
+        }
+
+
+        // setup clock
+        var date = new Date();
+        var seconds = date.getSeconds();
+        var minutes = date.getMinutes();
+        var hours = date.getHours();
+
+        function refreshClock() {
+            document.querySelector(".minutes-container").style.transform = 'rotateZ(' + ((minutes) * 6) + 'deg)';
+            document.querySelector(".hours-container").style.transform = 'rotateZ(' + ((hours * 30) + (minutes / 2)) + 'deg)';
+        }
+
+        refreshClock(); // Initialize clock
+        setTimeout(() => { // Set timeouts to sync hands and set intervals to move hands when required.
+            minutes++;
+            refreshClock();
+            setTimeout(() => {
+                refreshClock();
+                setInterval(() => {
+                    hours++;
+                    refreshClock();
+                }, 3600 * 1000);
+            }, (60 - minutes) * 60 * 1000);
+            setInterval(() => {
+                minutes++;
+                refreshClock();
+            }, 60 * 1000);
+        }, (60 - seconds) * 1000);
+    </script>
 </body>
 
 </html>

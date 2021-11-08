@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/pages/index.css">
     <title>Weather Today</title>
 </head>
 
@@ -20,8 +21,30 @@
         </div>
     </nav>
 
+    <main>
+        <div>
+            <div>
+                <h1>Weather Today</h1>
+                <p>Get detailed weather information in real time. By using this service you agree to our
+                    <a href="dpa.html">data processing agreement</a>.</p>
+            </div>
+        </div>
+        <div>
+            <div id="forecast"></div>
+        </div>
+    </main>
+
 
     <script src="assets/script.js"></script>
+    <script>
+        fetchApi(ENDPOINTS.TODAY).then(data => {
+            document.getElementById("forecast").innerHTML = `
+            ${data.current.temp_c}°C
+            <img src='${data.current.condition.icon}' alt='' />
+            At ${data.location.name}
+            `
+        })
+    </script>
 </body>
 
 </html>

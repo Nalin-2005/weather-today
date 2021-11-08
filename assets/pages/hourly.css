@@ -1,0 +1,161 @@
+main {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    position: relative;
+}
+
+main * {
+    text-align: center;
+}
+
+#button-grid {
+    width: 90vmin;
+    height: 90vmin;
+    margin: auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+}
+
+.hour {
+    background-color: #fff5;
+    cursor: pointer;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.hour:hover {
+    background-color: #fff9;
+}
+
+.clock {
+    grid-column: 4;
+    grid-row: 4;
+    background-color: #000;
+    border-radius: 50%;
+    width: 60%;
+    height: 60%;
+    margin: auto;
+    position: relative;
+    content: " ";
+}
+
+.clock .hours-container,
+.clock .minutes-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: all .3s cubic-bezier(.4, 2.08, .55, .44);
+}
+
+.hours,
+.minutes {
+    background: #000;
+    position: absolute;
+    transform-origin: 50% 100%;
+}
+
+.hours {
+    height: 15vmin;
+    left: calc(50% - 5px);
+    top: calc(-15vmin + 50%);
+    width: 10px;
+    border-radius: 5px;
+}
+
+.minutes {
+    height: 25vmin;
+    left: calc(50% - 4px);
+    top: calc(-25vmin + 50%);
+    width: 8px;
+    border-radius: 4px;
+}
+
+.meridiem {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background-color: #fff5;
+    padding: 1rem 2rem;
+    font-size: xx-large;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+.meridiem:hover {
+    background-color: #fff9;
+}
+
+#forecast-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    place-items: center;
+    background-color: #0009;
+    z-index: 20;
+    display: none;
+}
+
+#forecast-closer {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    fill: #fff;
+    cursor: pointer;
+}
+
+#forecast {
+    display: flex;
+    width: 90vmin;
+    height: 90vmin;
+    background-color: #eee;
+    border-radius: 1rem;
+    box-shadow: 0 0 5vmin 0 #0005;
+    padding: 1rem;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+
+#forecast img {
+    transform: scale(2);
+}
+
+#forecast * {
+    color: #000;
+    margin: 1rem 0;
+}
+
+@media screen and (max-width:750px) {
+    #button-grid {
+        font-size: 1.2rem;
+    }
+    .hours {
+        left: calc(50% - 4px);
+        width: 8px;
+        border-radius: 4px;
+    }
+    .minutes {
+        left: calc(50% - 3px);
+        width: 6px;
+        border-radius: 3px;
+    }
+    #forecast {
+        font-size: large;
+    }
+    #forecast * {
+        margin: .3rem 0;
+    }
+}

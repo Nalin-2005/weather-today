@@ -1,0 +1,51 @@
+main {
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+
+main * {
+    text-align: center;
+}
+
+#forecast {
+    width: 50%;
+    height: 90%;
+    margin: auto;
+    background-color: #fff5;
+    padding: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1rem;
+}
+
+#forecast h2 {
+    margin: 1rem 0;
+}
+
+#forecast img {
+    transform: scale(2);
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.flex p {
+    padding: 1rem;
+    flex: 1;
+}
+
+@media screen and (max-width:750px) {
+    #forecast {
+        width: 100%;
+        height: 100%;
+        font-size: 1.2rem;
+        background-color: transparent;
+    }
+}
