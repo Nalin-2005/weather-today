@@ -5,6 +5,7 @@ exports.handler = async function (event, context) {
 	// If localhost, use auto:ip
 	
 	let resp = await request(`http://api.weatherapi.com/v1/forecast.json?q=${query}&key=13241e17ba4045aa99440133212110`, {})
+	console.log(JSON.stringify({event, context, query, resp}, null, 2))
 	return {
 		statusCode: 200,
 		body: JSON.stringify(resp)
