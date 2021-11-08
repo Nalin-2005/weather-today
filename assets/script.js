@@ -38,12 +38,16 @@ function range(length){
 	return Array.apply(0, Array(length)).map(function(_,b) { return b + 1; });
 }
 async function fetchApi(endpoint){
-	let ip = (await (await fetch("https://httpbin.org/ip")).json()).origin;  // get user's ip address from this api
 	let url = "/.netlify/functions/" + endpoint
-	const response = await fetch(url, {
-		body: new URLSearchParams({ip}),
-		method: "POST"
-	});
+	let options = {}
+	if(endpoint == ENDPOINTS.TODAY){
+		let ip = (await (await fetch("https://httpbin.org/ip")).json()).origin;  // get user's ip address from this api
+		options = {
+			body: new URLSearchParams({ip}),
+			method: "POST"
+		}
+	}
+	const response = await fetch(url, options);
 	const data = await response.json();
 	return data;
 }
