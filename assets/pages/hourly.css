@@ -10,8 +10,8 @@ main * {
 }
 
 #button-grid {
-    width: 90vmin;
-    height: 90vmin;
+    width: 85vmin;
+    height: 85vmin;
     margin: auto;
     padding: 1rem;
     font-size: 1.5rem;

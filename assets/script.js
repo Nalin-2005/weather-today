@@ -37,17 +37,19 @@ const hourPositions = [
 function range(length){
 	return Array.apply(0, Array(length)).map(function(_,b) { return b + 1; });
 }
-async function fetchApi(endpoint){
-	let url = "/.netlify/functions/" + endpoint
+async function fetchApi(ip_or_location){
 	let options = {}
-	if(endpoint == ENDPOINTS.TODAY){
-		let ip = (await (await fetch("https://httpbin.org/ip")).json()).origin;  // get user's ip address from this api
-		options = {
-			body: new URLSearchParams({ip}),
-			method: "POST"
-		}
+	let query;
+	if(ip_or_location == "IP"){
+		query = (await (await fetch("https://httpbin.org/ip")).json()).origin;  // get user's ip address from this api
+	} else {
+		query = ip_or_location
 	}
-	const response = await fetch(url, options);
+	options = {
+		body: new URLSearchParams({query}),
+		method: "POST"
+	}
+	const response = await fetch("/.netlify/functions/today", options);
 	const data = await response.json();
 	return data;
 }

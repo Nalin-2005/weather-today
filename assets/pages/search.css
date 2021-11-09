@@ -1,0 +1,94 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+#searchinput {
+    width: 300px;
+    overflow: hidden;
+    font-size: 20px;
+    margin: 10px 0;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 3px solid #ff6768;
+    color: white;
+    outline: none;
+    background: none;
+}
+
+#searchinput::placeholder {
+    color: #fff9;
+}
+
+#searchbutton {
+    color: blue;
+    background: #ffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    padding: 15px;
+    border: 4px solid #e100ff;
+    display: inline-block;
+    transition: all 0.7 ease 1s;
+    cursor: pointer;
+}
+
+#searchbutton:hover {
+    background-color: #fff9;
+}
+
+#forecast {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90vmin;
+    height: 90vmin;
+}
+
+#forecast * {
+    text-align: center;
+}
+
+#forecast h2 {
+    margin: 1rem 0;
+}
+
+#forecast img {
+    transform: scale(2);
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.flex p {
+    padding: 1rem;
+    flex: 1;
+}
+
+@media screen and (max-width:750px) {
+    #forecast {
+        width: 100%;
+        height: 100%;
+        font-size: 1.2rem;
+    }
+}

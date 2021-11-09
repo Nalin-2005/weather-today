@@ -1,7 +1,7 @@
 const request = require("./utils").request;
 
 exports.handler = async function (event, context) {
-	let query = new URLSearchParams(event.body).get("ip");
+	let query = new URLSearchParams(event.body).get("query");
 	let resp = await request(`http://api.weatherapi.com/v1/forecast.json?q=${query}&key=13241e17ba4045aa99440133212110`, {})
 	return {
 		statusCode: 200,

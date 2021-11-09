@@ -34,7 +34,7 @@
 
     <script src="assets/script.js"></script>
     <script>
-        fetchApi(ENDPOINTS.TODAY).then(data => {
+        fetchApi("IP").then(data => {
             let forecast = data.forecast.forecastday[0];
             document.getElementById("forecast").innerHTML = `
             <h2>Weather forecast for ${data.location.name}</h1>

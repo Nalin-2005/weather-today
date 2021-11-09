@@ -1,0 +1,14 @@
+This website uses external APIs for fetching weather information 
+and it requires doing some poxy requests to get the data securely. 
+For setting up the proxy server, we have used netlify functions 
+which would not work on the local machine when an html file is opened 
+directly, and so, the website would not work as intended.
+
+For the working of the website, you need to set it up on netlify or 
+use netlify cli's development server. For now, the website has been 
+hosted at https://weather-today-mcs.netlify.app/.
+
+
+Created by: 
+- Nalin Angrish
+- Aditya Verma

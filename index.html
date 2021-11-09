@@ -42,7 +42,7 @@
 
     <script src="assets/script.js"></script>
     <script>
-        fetchApi(ENDPOINTS.TODAY).then(data => {
+        fetchApi("IP").then(data => {
             document.getElementById("forecast").innerHTML = `
             ${data.current.temp_c}°C
             <img src='${data.current.condition.icon}' alt='' />
